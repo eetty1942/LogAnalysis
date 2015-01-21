@@ -1,5 +1,5 @@
 package com.maple.Analyzer;
 
-public class ApiKeyAnalyzer {
+public class OutputToFile {
 
 }

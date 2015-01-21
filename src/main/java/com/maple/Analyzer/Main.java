@@ -1,4 +1,4 @@
-package com.maple.main;
+package com.maple.Analyzer;
 
 public class Main {
 
