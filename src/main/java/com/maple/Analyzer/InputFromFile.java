@@ -55,7 +55,7 @@ public class InputFromFile {
 				
 				stateCode = logAnalyzer.analyzeStateCode(line);
 				apiServiceId = logAnalyzer.analyzeService(line);
-				browser = logAnalyzer.analyzeBrower(line);
+				browser = logAnalyzer.analyzeBrowser(line);
 				mostApiKey = logAnalyzer.analyzeApikey(line);
 				time = logAnalyzer.analyzeTime(line);
 				
