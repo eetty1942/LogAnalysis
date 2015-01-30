@@ -13,6 +13,10 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+@Service
 public class InputFromFile {
 	
 	private	FileInputStream fstream = null;

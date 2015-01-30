@@ -3,6 +3,9 @@ package com.maple.Analyzer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Service;
+
+@Service //("log")
 public class LogAnalyzer {
 
 	private String[] typeOfStateLog = new String[]
