@@ -8,39 +8,39 @@ import org.springframework.stereotype.Service;
 @Service //("log")
 public class LogAnalyzer {
 
-	private String[] typeOfStateLog = new String[]
-			{"[200]","[10]","[404]"};
+	private String[] stateLogType = new String[]
+			{"\\[200\\]","\\[10\\]","\\[404\\]"};
 	private String[] logRequest = new String[]
 			{"blog","book","image","knowledge","news","vclip"};
-	private String[] typeOfBrowser = new String[]
-			{"[IE]","[Firefox]","[Safari]","[Chrome]","[Opera]"};
+	private String[] browserType = new String[]
+			{"\\[IE\\]","\\[Firefox\\]","\\[Safari\\]","\\[Chrome\\]","\\[Opera\\]"};
 	private String apikey;
 	private String time;
-	public int index;
 	
-	public String analyzeStateCode(String data){
-		index=0;
+	
+	public String analyzeStateCode(String info){
+		int index=0;
 		
 		while(index!=3){
-			String stateLogInfo = String.format(typeOfStateLog[index++]);
+		
+			String stateLogInfo = String.format(stateLogType[index++]);
 			Pattern logPattern = Pattern.compile(stateLogInfo);
-			Matcher patternMatch = logPattern.matcher(data);
+			Matcher logPatternMatches = logPattern.matcher(info);
 			
-			if(patternMatch.find()){
-				String matchResult = patternMatch.group(0).trim();
+			if(logPatternMatches.find()){
+				String matchResult = logPatternMatches.group(0).trim();
 				return matchResult;
 			}
 		}
 		return ""; 
 	}
-	
-	public String analyzeService(String data){
-		index=0;
+	public String analyzeService(String info){
+		int index=0;
 		
 		while(index!=6){
 			String ServiceInfo = String.format(logRequest[index++]);
 			Pattern logPattern = Pattern.compile(ServiceInfo);
-			Matcher logPatternMatches = logPattern.matcher(data);
+			Matcher logPatternMatches = logPattern.matcher(info);
 			
 			if(logPatternMatches.find()){
 				String matchResult = logPatternMatches.group(0).trim();
@@ -49,14 +49,13 @@ public class LogAnalyzer {
 		}
 		return "";
 	}
-	
-	public String analyzeBrowser(String data){
-		index=0;
+	public String analyzeBrower(String info){
+		int index=0;
 		
 		while(index!=5){
-			String ServiceInfo = String.format(typeOfBrowser[index++]);
+			String ServiceInfo = String.format(browserType[index++]);
 			Pattern logPattern = Pattern.compile(ServiceInfo);
-			Matcher logPatternMatches = logPattern.matcher(data);
+			Matcher logPatternMatches = logPattern.matcher(info);
 			
 			if(logPatternMatches.find()){
 				String matchResult = logPatternMatches.group(0).trim();
@@ -65,13 +64,12 @@ public class LogAnalyzer {
 		}
 		return "";
 	}
-	
-	public String analyzeApikey(String data){		
+	public String analyzeApikey(String info){		
 		apikey = "apikey=.{4}";
 		
 		String ServiceInfo = String.format(apikey);
 		Pattern logPattern = Pattern.compile(ServiceInfo);
-		Matcher logPatternMatches = logPattern.matcher(data);
+		Matcher logPatternMatches = logPattern.matcher(info);
 		
 		if(logPatternMatches.find()){
 			String matchResult = logPatternMatches.group(0).trim().replace("apikey=","");
@@ -80,12 +78,12 @@ public class LogAnalyzer {
 		
 		return "";
 	}
-	public String analyzeTime(String data){
-		time = "d{4}-d{2}-d{2}" + " " + "d{2}:d{2}";
+	public String analyzeTime(String info){
+		time = "\\d{4}-\\d{2}-\\d{2}" + " " + "\\d{2}:\\d{2}";
 		
 		String timeInfo = String.format(time);
 		Pattern timePattern = Pattern.compile(timeInfo);
-		Matcher timePatternMatches = timePattern.matcher(data);
+		Matcher timePatternMatches = timePattern.matcher(info);
 		if(timePatternMatches.find()){
 			String matchResult = timePatternMatches.group(0).trim();
 			return matchResult;
